@@ -24,13 +24,14 @@ public class MarkovGenerator {
     public static String generate(String data, int resultSize, int suffixSize) {
         String[] words = data.trim().split(" ");
         check(words, suffixSize, resultSize);
-        MultiValueMap<String, String> dict = Arrays.stream(words).collect(new MarkovGenerator.MarkovCollector(suffixSize));
-        String prefix = dict.keySet().iterator().next();
+         
+        MultiValueMap<String, String> occurrences = Arrays.stream(words).collect(new MarkovGenerator.MarkovCollector(suffixSize));
+        String prefix = occurrences.keySet().iterator().next();
         List<String> result = new ArrayList<>(Arrays.asList(prefix.split(" ")));
 
         for (int i = suffixSize; i < resultSize; i++) {
-            List<String> sufList = dict.get(prefix);
-            if (CollectionUtils.isEmpty(sufList)) break;
+            List<String> sufList = occurrences.get(prefix);
+            if (CollectionUtils.isEmpty(sufList)) break; // means prefix contained end of corpus
             String suf = sufList.get(ThreadLocalRandom.current().nextInt(sufList.size()));
             result.add(suf);
             prefix = String.join(" ", result.subList(i + 1 - suffixSize, i + 1));
@@ -40,7 +41,7 @@ public class MarkovGenerator {
     }
 
     private static void check(String[] words, int keySize, int outputSize) {
-//TODO: some check
+        //TODO: add some check
     }
 
     @AllArgsConstructor
@@ -59,7 +60,7 @@ public class MarkovGenerator {
         public BiConsumer<List<String>, String> accumulator() {
             return (l, s) -> {
                 if (l.size() == batchSize) {
-                    res.add(String.join(" ", l), s.intern()); //use RLE intead (intern is slow)
+                    res.add(String.join(" ", l), s.intern()); //use RLE instead (intern is slow)
                     l.remove(0);
                 }
                 l.add(s);
