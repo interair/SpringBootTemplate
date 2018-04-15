@@ -1,4 +1,4 @@
-## This application is simple template
+## This application is simple spring-boot template
 Contains:
 * [Markov text generator](https://github.com/interair/SpringBootTemplate/blob/35624ac1de2767690672da783f9ed3f46060fd83/src/main/java/io/github/pronto/markov/service/MarkovGenerator.java#L24) :)
 * Spring boot 
