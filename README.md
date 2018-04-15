@@ -1,6 +1,6 @@
 ## This application is simple spring-boot template
 Contains:
-* [Markov text generator](https://github.com/interair/SpringBootTemplate/blob/35624ac1de2767690672da783f9ed3f46060fd83/src/main/java/io/github/pronto/markov/service/MarkovGenerator.java#L24) :)
+* [Markov text generator](https://github.com/interair/SpringBootTemplate/tree/master/src/main/java/io/github/pronto/markov/service/MarkovGenerator.java#L24) :)
 * Spring boot 
 * [Rest API with undertow](https://github.com/interair/SpringBootTemplate/tree/master/src/main/java/io/github/pronto/markov/web/rest)
 * [Spring data (jpa)](https://github.com/interair/SpringBootTemplate/tree/master/src/main/java/io/github/pronto/markov/repository)
