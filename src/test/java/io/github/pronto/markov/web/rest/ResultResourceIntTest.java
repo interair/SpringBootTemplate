@@ -53,7 +53,6 @@ public class ResultResourceIntTest {
             .content(TestUtil.convertToJson(getResult())))
             .andExpect(status().isCreated());
 
-        // Validate the User in the database
         List<ResultDTO> resList = resultService.getAllUserResults(Pageable.unpaged(), user);
         assertThat(resList).hasSize(databaseSizeBeforeCreate + 1);
         ResultDTO testRes = resList.get(resList.size() - 1);
