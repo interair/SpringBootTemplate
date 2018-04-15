@@ -1,0 +1,5 @@
+id;password_hash;email;created_by;last_modified_by
+1;$2a$10$3Pm1DrI8aimwYUNDLW4HquEqgkcqSDG0ljfaBoac8dF0lO8Jy3aCG;system@localhost.com;system;system
+2;$2a$10$3Pm1DrI8aimwYUNDLW4HquEqgkcqSDG0ljfaBoac8dF0lO8Jy3aCG;anonymous@localhost.com;system;system
+3;$2a$10$3Pm1DrI8aimwYUNDLW4HquEqgkcqSDG0ljfaBoac8dF0lO8Jy3aCG;admin@localhost.com;system;system
+4;$2a$10$3Pm1DrI8aimwYUNDLW4HquEqgkcqSDG0ljfaBoac8dF0lO8Jy3aCG;user@localhost.com;system;system

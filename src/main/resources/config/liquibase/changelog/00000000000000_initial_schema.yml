@@ -1,0 +1,134 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: vp
+      changes:
+        - createTable:
+            tableName: user
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: password_hash
+                  type: varchar(255)
+              - column:
+                  name: email
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: created_by
+                  type: varchar(255)
+              - column:
+                  name: created_date
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+              - column:
+                  name: last_modified_by
+                  type: varchar(255)
+              - column:
+                  name: last_modified_date
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+        - createTable:
+            tableName: authority
+            columns:
+              - column:
+                  name: name
+                  type: varchar(50)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+        - createTable:
+            tableName: user_authority
+            columns:
+              - column:
+                  name: user_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: authority_name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: result
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: result
+                  type: varchar(10000)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: data
+                  type: varchar(10000)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: suffix_size
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: result_size
+                  type: int
+                  constraints:
+                    nullable: false
+        - addPrimaryKey:
+              columnNames: user_id, authority_name
+              tableName: user_authority
+              constraintName: pk_ua
+        - addForeignKeyConstraint:
+              baseColumnNames: authority_name
+              baseTableName: user_authority
+              constraintName: fk_authority_name
+              referencedColumnNames: name
+              referencedTableName: authority
+        - addForeignKeyConstraint:
+              baseColumnNames: user_id
+              baseTableName: user_authority
+              constraintName: fk_user_id
+              referencedColumnNames: id
+              referencedTableName: user
+        - addForeignKeyConstraint:
+              baseColumnNames: user
+              baseTableName: result
+              constraintName: fkr_user_id
+              referencedColumnNames: id
+              referencedTableName: user
+        - loadData:
+              file: config/liquibase/users.csv
+              separator: ;
+              tableName: user
+              columns:
+              - column:
+                    name: created_date
+                    type: timestamp
+        - loadData:
+              file: config/liquibase/authorities.csv
+              separator: ;
+              tableName: authority
+        - loadData:
+              file: config/liquibase/users_authorities.csv
+              separator: ;
+              tableName: user_authority
+

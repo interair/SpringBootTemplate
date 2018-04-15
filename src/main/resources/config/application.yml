@@ -1,0 +1,43 @@
+management:
+    security:
+        roles: ADMIN
+    context-path: /management
+    info:
+        git:
+            mode: full
+spring:
+    application:
+        name: markovTextGenerator
+    profiles:
+        active: #spring.profiles.active#
+    jackson:
+        serialization.write_dates_as_timestamps: false
+    jpa:
+        open-in-view: false
+        hibernate:
+            ddl-auto: none
+            naming:
+                physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+                implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+    messages:
+        basename: i18n/messages
+    mvc:
+        favicon:
+            enabled: false
+    thymeleaf:
+        mode: XHTML
+    liquibase:
+        change-log: classpath:config/liquibase/changelog/00000000000000_initial_schema.yml
+security:
+    basic:
+        enabled: false
+
+server:
+    session:
+        cookie:
+            http-only: true
+
+info:
+    project:
+        version: #project.version#
+
