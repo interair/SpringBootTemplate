@@ -59,7 +59,7 @@ public class MarkovGenerator {
         public BiConsumer<List<String>, String> accumulator() {
             return (l, s) -> {
                 if (l.size() == batchSize) {
-                    res.add(String.join(" ", l), s.intern());
+                    res.add(String.join(" ", l), s.intern()); //use RLE intead (intern is slow)
                     l.remove(0);
                 }
                 l.add(s);
