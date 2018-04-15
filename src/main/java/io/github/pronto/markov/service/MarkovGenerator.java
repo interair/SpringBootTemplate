@@ -25,7 +25,6 @@ public class MarkovGenerator {
         String[] words = data.trim().split(" ");
         check(words, suffixSize, resultSize);
         MultiValueMap<String, String> dict = Arrays.stream(words).collect(new MarkovGenerator.MarkovCollector(suffixSize));
-        int n = 0;
         String prefix = dict.keySet().iterator().next();
         List<String> result = new ArrayList<>(Arrays.asList(prefix.split(" ")));
 
