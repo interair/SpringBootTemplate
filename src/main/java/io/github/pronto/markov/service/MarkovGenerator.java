@@ -19,13 +19,15 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
-public class MarkovGenerator {
+import static io.github.pronto.markov.service.MarkovGenerator.MarkovCollector.collect;
+
+class MarkovGenerator {
 
     public static String generate(String data, int resultSize, int suffixSize) {
         String[] words = data.trim().split(" ");
         check(words, suffixSize, resultSize);
          
-        MultiValueMap<String, String> occurrences = Arrays.stream(words).collect(new MarkovGenerator.MarkovCollector(suffixSize));
+        MultiValueMap<String, String> occurrences = Arrays.stream(words).collect(collect(suffixSize));
         String prefix = occurrences.keySet().iterator().next();
         List<String> result = new ArrayList<>(Arrays.asList(prefix.split(" ")));
 
@@ -81,5 +83,10 @@ public class MarkovGenerator {
         public Set<Characteristics> characteristics() {
             return Collections.emptySet();
         }
+
+        static MarkovCollector collect(int batchSize) {
+            return new MarkovCollector(batchSize);
+        }
     }
+
 }
