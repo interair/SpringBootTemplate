@@ -61,11 +61,7 @@ task testReport(type: TestReport) {
     reportOn test
 }
 
-
 apply from: 'gradle/liquibase.gradle'
-apply from: 'gradle/swagger.gradle'
-
-
 
 configurations {
     providedRuntime
