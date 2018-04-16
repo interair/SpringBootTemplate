@@ -79,7 +79,7 @@ public class ResultResourceIntTest {
     }
 
     @Test
-    public void deleteUser() throws Exception {
+    public void deleteResult() throws Exception {
         createResult();
 
         int databaseSizeBeforeDelete = resultService.getAllUserResults(Pageable.unpaged(), user).size();
