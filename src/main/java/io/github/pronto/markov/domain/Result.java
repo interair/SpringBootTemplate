@@ -19,9 +19,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/**
- * A user.
- */
 @Entity
 @Table(name = "result")
 @Data
